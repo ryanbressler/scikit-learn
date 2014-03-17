@@ -1139,6 +1139,9 @@ cdef class BestSplitter(Splitter):
                         while (p + 1 < end and
                                Xf[p + 1] <= Xf[p] + CONSTANT_FEATURE_THRESHOLD):
                             p += 1
+                            if Xf[p+1]<Xf[p]:
+                                with gil:
+                                    print "%s not Sorted at %s, %s < %s"%(current_feature, p,Xf[p+1], Xf[p])
 
                         # (p + 1 >= end) or (X[samples[p + 1], current_feature] >
                         #                    X[samples[p], current_feature])
